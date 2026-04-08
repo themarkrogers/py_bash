@@ -1,4 +1,19 @@
+<!--- BADGES: START --->
+
+[![GitHub license](https://img.shields.io/badge/License-AGPLv3-blue.svg)][#license-gh-package]
+[![Unit Tests](https://github.com/themarkrogers/py_bash/actions/workflows/ci.yml/badge.svg)](https://github.com/themarkrogers/py_bash/actions/workflows/ci.yml)
+[![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
+<!-- [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/py_bash)][#pypi-package] -->
+<!-- [![PyPI](https://img.shields.io/pypi/v/py_bash)][#pypi-package] -->
+
+[#license-gh-package]: https://www.gnu.org/licenses/agpl-3.0.en.html#license-text
+<!-- [#pypi-package]: https://pypi.org/project/py_bash/ -->
+
+<!--- BADGES: END --->
+
 # Py-Bash
+
+![Logo](assets/py_bash-logo.png)
 
 ## Description
 

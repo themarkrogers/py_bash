@@ -16,4 +16,6 @@ pre-commit:
 	uv run ruff format --check .
 	uv run pytest
 run-tests:
-	uv run pytest
+	uv run pytest --cov=py_bash --cov-report=html
+run-tests-terminal:
+	uv run pytest --cov=py_bash --cov-report=term-missing

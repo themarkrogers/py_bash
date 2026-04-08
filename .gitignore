@@ -16,3 +16,6 @@ py_bash.egg-info
 htmlcov/
 .coverage
 coverage.xml
+
+# Asset Editing
+*.xcf
