@@ -23,6 +23,6 @@ Prerequisites:
 ## Common Operations
 
 * Install project dependencies: `make install`
-* Run Tests: `make test`
+* Run Tests: `make run-tests`
 * Format & Lint: `make lint`
 * Format, Lint, and Fix: `make lint-fix`

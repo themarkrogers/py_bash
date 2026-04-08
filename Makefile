@@ -15,5 +15,5 @@ pre-commit:
 	uv run ruff check .
 	uv run ruff format --check .
 	uv run pytest
-test:
-	set -euo pipefail uv run pytest
+run-tests:
+	uv run pytest
