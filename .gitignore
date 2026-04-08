@@ -1,0 +1,16 @@
+# General
+*~
+
+# macOS
+.DS_Store
+
+# Python
+venv
+*.py[cod]
+
+# JetBrains
+.idea
+
+# CI/CD
+.coverage
+htmlcov
