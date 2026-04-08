@@ -41,3 +41,14 @@ Prerequisites:
 * Run Tests: `make run-tests`
 * Format & Lint: `make lint`
 * Format, Lint, and Fix: `make lint-fix`
+* Show package version from `VERSION`: `make version-show`
+* After tagging `v*`, verify tag matches `VERSION`: `make version-check-tag`
+
+## Versioning
+
+Releases follow [SemVer](https://semver.org/).
+The canonical version string is the repo-root `VERSION` file (which contains no `v` prefix).
+Git tags use a `v` prefix (e.g., `v0.1.0`). Packaging reads `VERSION` via `pyproject.toml` dynamic metadata.
+
+To cut a release: bump `VERSION`, commit, create an annotated tag `vX.Y.Z` on that commit, and push the branch and tag.
+CI runs `scripts/verify_version_matches_tag.py` on tag pushes so the tag matches `VERSION`.
