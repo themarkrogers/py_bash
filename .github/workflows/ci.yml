@@ -42,8 +42,5 @@ jobs:
       - name: Run tests
         run: make run-tests
 
-      - name: Install package build tool
-        run: uv run python -m pip install build
-
       - name: Test building the library
         run: make build
