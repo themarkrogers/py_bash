@@ -24,6 +24,8 @@ jobs:
           fetch-depth: 0
 
       - name: Create and push tag if missing
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           VERSION=$(tr -d ' \t\r\n' < VERSION)
@@ -32,6 +34,10 @@ jobs:
             exit 1
           fi
           TAG="v${VERSION}"
+          if gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "Release ${TAG} already exists; refusing to create/push tag." >&2
+            exit 1
+          fi
           if [ -n "$(git ls-remote --tags origin "refs/tags/${TAG}")" ]; then
             echo "Tag ${TAG} already exists on origin; nothing to do."
             exit 0
