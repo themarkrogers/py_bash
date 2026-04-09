@@ -43,7 +43,10 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-exclude = ["assets", "contrib", "docs", "scripts", "test*"]
+exclude = ["assets", "build*", "contrib", "dist*", "docs", "scripts", "test*"]
+
+[tool.mypy]
+exclude = "^(build|dist)/"
 
 [tool.pytest.ini_options]
 testpaths = ["test"]
