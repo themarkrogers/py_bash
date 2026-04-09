@@ -14,6 +14,7 @@ py_bash.egg-info
 .idea/
 
 # CI/CD
+build/
 htmlcov/
 .coverage
 coverage.xml
