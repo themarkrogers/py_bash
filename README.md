@@ -19,9 +19,9 @@
 
 <!--- BADGES: END --->
 
-# Py Bash Wrapper
+# Py-Bash-Wrapper
 
-![Logo](https://github.com/themarkrogers/py_bash_wrapper/blob/main/assets/py_bash_wrapper-logo.png)
+![(image of a cartoon snake on a `$_`)](https://github.com/themarkrogers/py_bash_wrapper/blob/main/assets/py_bash_wrapper-logo.png)
 
 ## Description
 
@@ -50,31 +50,10 @@ pip install py_bash_wrapper
 - [Maintainers](https://github.com/themarkrogers/py_bash_wrapper/blob/main/docs/maintainers.md) -- versions, CI, releases, security notes for shell APIs.
 - [Plan / roadmap](https://github.com/themarkrogers/py_bash_wrapper/blob/main/docs/plan.md) -- upcoming tasks.
 
-Full API details live in docstrings under `py_bash_wrapper/bash_utils.py` and in the usage doc above.
-
 ## Security note
 
 **`run_bash` executes shell code.** Do not pass untrusted input as the Bash command string. Prefer **`run_command`**
 with a fixed argv when shell features are not required. See [docs/usage_examples.md](https://github.com/themarkrogers/py_bash_wrapper/blob/main/docs/usage_examples.md).
-
-## Quick start
-
-Prerequisites: [Initial setup](#initial-setup) (`uv`, `make`, and a supported version of Python3).
-
-```bash
-make install
-```
-
-```python
-from py_bash_wrapper.bash_utils import run_command, run_bash
-
-print(run_command(["python", "-c", "print(1+1)"], check=True).stdout.strip())
-print(run_bash("echo hello | wc -c", check=True).stdout.strip())
-```
-
-```bash
-make run-tests
-```
 
 ## Initial setup
 
@@ -91,31 +70,6 @@ Prerequisites:
 * **Python 3.12+**: install via OS package manager, via `uv` with `uv python install 3.12`, or via
   [python.org](https://www.python.org/downloads/).
 
-## Common operations
-
-* Install dependencies and pre-commit hooks: `make install`
-* Run tests (coverage HTML): `make run-tests`
-* Run tests (terminal coverage summary): `make run-tests-terminal`
-* Lint and format check: `make lint`
-* Lint with auto-fix and format write: `make lint-fix`
-* Pre-commit gate (Ruff + pytest): `make pre-commit`
-* Build sdist and wheel: `make build`
-* Print version from `VERSION`: `make version-show`
-* After a `v*` tag on `HEAD`, verify it matches `VERSION`: `make version-check-tag`
-
 ## Versioning
 
 Releases follow [SemVer](https://semver.org/).
-The canonical version string is the repo-root `VERSION` file (which contains no `v` prefix).
-Git tags use a `v` prefix (e.g., `v0.2.0`). Packaging reads `VERSION` via `pyproject.toml` dynamic metadata.
-
-To cut a release: bump `VERSION` on a branch, open a PR, and merge to `main`.
-When `VERSION` changes on `main`, the **Tag and release from VERSION** workflow
-(`.github/workflows/release-from-version.yml`) creates an annotated tag `vX.Y.Z` on that commit. Then, if that tag does
-not already exist on the remote, and if no GitHub Release already exists for that same tag, then the workflow pushes it.
-The same workflow then verifies tag/version consistency, builds the wheel and sdist artifacts, publishes a GitHub
-Release immediately with auto-generated notes, and uploads the same artifacts to PyPI (Trusted Publishing; GitHub
-environment `pypi`). Configure the publisher in PyPI before the first upload; see [docs/maintainers.md](https://github.com/themarkrogers/py_bash_wrapper/blob/main/docs/maintainers.md).
-
-After a tag exists (or locally before pushing), `make version-check-tag` can be run to confirm the current `v*` tag
-matches `VERSION`. CI runs `scripts/verify_version_matches_tag.py` on tag pushes for the same check.
