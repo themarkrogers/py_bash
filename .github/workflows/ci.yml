@@ -46,8 +46,7 @@ jobs:
         run: make build
 
       - name: Check package metadata (twine)
-        run: |
-          python -m twine check dist/*
+        run: uv run python -m twine check dist/*
 
       - name: Install built wheel in clean venv
         run: |
