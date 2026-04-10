@@ -19,13 +19,23 @@ For a development checkout, see [README.md](../README.md) (Initial setup).
 
 ## Prefer `run_command` (no shell)
 
-Use a fixed argument list when you do not need pipes, redirects, globbing, or other shell syntax. This avoids shell
-injection when arguments are dynamic but individually controlled (still validate inputs in your own code).
+`run_command` accepts either a **`Sequence[str]`** (argv) or a **`str`**. A string is split with **`shlex.split`** into
+argv and still runs **without** a shell -- there are no pipes, redirects, globbing, or other shell features. Use
+**`run_bash`** when you need those.
+
+Prefer a list when arguments are dynamic but individually controlled: each element is one argument, so there is no
+parsing ambiguity. A string is convenient for literals (e.g., quoted segments) but is not a substitute for Bash; do not
+pass untrusted strings expecting them to be "just argv" without reviewing how `shlex.split` will tokenize them (still
+validate inputs in your own code).
 
 ```python
 from py_bash_wrapper.bash_utils import run_command
 
 result = run_command(["echo", "hello"], check=True)
+print(result.stdout)
+
+# Equivalent argv after shlex.split; still no shell.
+result = run_command('echo "hello world"', check=True)
 print(result.stdout)
 ```
 
