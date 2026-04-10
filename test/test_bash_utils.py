@@ -148,12 +148,26 @@ class TestMakePreExecFunctionToRunAsUser(TestCase):
 class TestRunCommand(TestCase):
     """Tests for `run_command`."""
 
-    def test_given_empty_argv_then_raises_value_error(self) -> None:
+    def test_given_empty_list_command_then_raises_value_error(self) -> None:
         # Given
         argv: list[str] = []
         # When & Then
-        with pytest.raises(ValueError, match="argv must not be empty"):
+        with pytest.raises(ValueError, match="command must not be empty"):
             under_test.run_command(argv)
+
+    def test_given_empty_string_command_then_raises_value_error(self) -> None:
+        # Given
+        command = ""
+        # When & Then
+        with pytest.raises(ValueError, match="command must not be empty"):
+            under_test.run_command(command)
+
+    def test_given_sequence_with_non_string_elements_then_raises_value_error(self) -> None:
+        # Given
+        bad: list[object] = ["echo", 1]
+        # When & Then
+        with pytest.raises(ValueError, match="command must be either"):
+            under_test.run_command(cast("list[str]", bad))
 
     @patch("py_bash.bash_utils.subprocess.run", autospec=True)
     def test_given_successful_process_then_result_ok_and_output_set(self, mock_subprocess_run: MagicMock) -> None:
@@ -169,6 +183,21 @@ class TestRunCommand(TestCase):
         assert result.command_display
         mock_subprocess_run.assert_called_once()
         assert mock_subprocess_run.call_args[0][0] == argv
+
+    @patch("py_bash.bash_utils.subprocess.run", autospec=True)
+    def test_given_string_command_then_splits_with_shlex_like_argv_list(self, mock_subprocess_run: MagicMock) -> None:
+        # Given
+        mock_subprocess_run.return_value = _completed(return_code=0, stdout="hi\n", stderr="")
+        command = 'echo "hi there"'
+        expected_argv = ["echo", "hi there"]
+        # When
+        result = under_test.run_command(command)
+        # Then
+        assert result.ok is True
+        assert result.stdout == "hi\n"
+        mock_subprocess_run.assert_called_once()
+        assert mock_subprocess_run.call_args[0][0] == expected_argv
+        assert result.args == expected_argv
 
     @patch("py_bash.bash_utils.subprocess.run", autospec=True)
     def test_given_nonzero_exit_and_check_false_then_no_raise(self, mock_subprocess_run: MagicMock) -> None:
