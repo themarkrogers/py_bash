@@ -2,7 +2,7 @@
 
 [![GitHub license][#agpl-v3]][#license-gh-package]
 [![Unit Tests][#ci-badge-img]][#ci-workflow]
-[![Project Status][#status-active]][#status-licenses]
+[![Project Status][#status-active]][#status-sources]
 [![PyPI - Python Version][#pypi-project-python-version]][#pypi-package]
 [![PyPI][#pypi-project-version]][#pypi-package]
 
@@ -13,9 +13,9 @@
 [#pypi-package]: https://pypi.org/project/py_bash_wrapper/
 [#pypi-project-python-version]: https://img.shields.io/pypi/pyversions/py_bash_wrapper
 [#pypi-project-version]: https://img.shields.io/pypi/v/py_bash_wrapper
-[#status-active]: http://opensource.box.com/badges/active.svg
-[#status-inactive]: http://opensource.box.com/badges/inactive.svg
-[#status-licenses]: http://opensource.box.com/badges
+[#status-active]: https://opensource.box.com/badges/active.svg
+[#status-inactive]: https://opensource.box.com/badges/inactive.svg
+[#status-sources]: https://opensource.box.com/badges
 
 <!--- BADGES: END --->
 
