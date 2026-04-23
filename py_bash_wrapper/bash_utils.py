@@ -182,6 +182,7 @@ def run_bash(
     login: bool = False,
     strict: bool = True,
     path_to_shell_executable: str = "/bin/bash",
+    shell: bool = False,
 ) -> CommandResult:
     """
     Run a real Bash command string.
@@ -226,6 +227,7 @@ def run_bash(
         check=False,
         inherit_env=inherit_env,
         user=user,
+        shell=shell,
     )
     # Show the caller's Bash source in errors/logs; args still reflect the real argv (bash -c script).
     result = CommandResult(
@@ -252,6 +254,7 @@ def run_command(
     text: bool = True,
     inherit_env: bool = True,
     user: str | None = None,
+    shell: bool = False,
 ) -> CommandResult:
     """
     Run a normal command safely without a shell.
@@ -318,6 +321,7 @@ def run_command(
             timeout=timeout,
             check=False,
             preexec_fn=pre_exec_function_to_run_as_user,
+            shell=shell,
         )
     except subprocess.TimeoutExpired as exc:
         raise TimeoutError(f"Command timed out after {timeout}s: {_quote_join(final_argv)}") from exc
